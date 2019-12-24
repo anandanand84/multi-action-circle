@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tlab Editor Demo</title>
+    <meta name="description" content="${2}">
+    <!-- Mobile -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <!-- Chrome / Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="black">
+    <link rel="icon" href="icon.png">
+    <!-- Safari / iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
+    <!-- Web Components -->
+    <script src="../webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="multi-action-circle.html">
+    <style>
+        .full {
+            height: 100%;
+        }
+        body{
+            background-color : #F1F1F1;
+        }
+    </style>
+</head>
+<body class="fullbleed">
+    <template is="dom-bind" id="app">
+        <!--header-->
+        <div class="full layout vertical justified">
+               <multi-action-circle></multi-action-circle>
+        </div>
+    </template>
+</body>
+
+<script>
+    window.addEventListener('WebcomponentsReady', function() {
+        
+    });
+    app._buy = function() {
+        this.$.trade.buy('NSE:RELIANCE')
+    }
+    
+    app._sell = function() {
+        this.$.trade.sell('NSE:INFY')
+    }
+</script>
+</html>

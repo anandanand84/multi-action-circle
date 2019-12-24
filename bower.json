@@ -1,0 +1,20 @@
+{
+  "name": "multi-action-circle",
+  "homepage": "https://github.com/anandanand84/multi-action-circle",
+  "authors": [
+    "Anand Aravindan <anand.anand84@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.7.1"
+  }
+}

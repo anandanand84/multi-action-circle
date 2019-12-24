@@ -1,0 +1,85 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="multi-action-circle">
+  <template>
+    <style>
+      #container {
+        position : absolute;
+      }
+      svg {
+        width : 100%;
+        height : 100%;
+      }
+      circle {
+        fill: -moz-linear-gradient(top, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%); /* FF3.6+ */
+      }
+
+      .circle-initial {
+        stroke-dasharray: 63;
+        stroke-dashoffset: 63;
+      }
+
+      .circle-select {
+        animation: dash 0.5s linear forwards;
+      }
+    </style>
+    <svg viewBox="0 0 90 40" preserveAspectRatio="xMidYMid meet" class="circleFill">
+      <defs>
+        <linearGradient id="lgrad" x1="97%" y1="100%" x2="3%" y2="0%" > 
+          <stop offset="0%" style="stop-color:rgb(161,217,255);stop-opacity:1" />
+          <stop offset="1%" style="stop-color:rgb(159,216,253);stop-opacity:1" />
+          <stop offset="26%" style="stop-color:rgb(118,193,221);stop-opacity:1" />
+          <stop offset="41%" style="stop-color:rgb(94,179,202);stop-opacity:1" />
+          <stop offset="59%" style="stop-color:rgb(65,163,179);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgb(0,128,128);stop-opacity:1" />
+        </linearGradient> 
+      </defs>
+      <circle id="circle" transform="rotate(-90 45 20)" class="circle-initial" on-mousedown="initiateAction" on-mouseup="cancelAction" fill="url(#lgrad)" fill-opacity="0.4" cx=45 cy=20 r=10  stroke="tomato"></circle>
+    </svg>
+  </template>
+
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'multi-action-circle',
+
+      listeners : {
+      },
+
+      properties: {
+
+      },
+
+      initiateAction : function() {
+        this.$.circle.setAttribute('class', 'circle-initial circle-select');
+        this.startedAction = false;
+        var self = this;
+        this.pendingAction = setTimeout(function() {
+          self.startedAction = true;
+          self.$.circle.setAttribute('class', 'circle-initial')
+          console.log('trigger action');
+        },1000)
+      },
+
+      cancelAction : function() {
+        if(!this.startedAction) {
+          clearTimeout(this.pendingAction);
+          this.$.circle.setAttribute('class', 'circle-initial')
+          console.log('action cancelled');
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>
